@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VTPlayer — Sharper. Smoother. Better.</title>
+  <meta name="description" content="VTPlayer uses Apple's native APIs to upscale, interpolate, denoise, and enhance video in real time.">
+  <meta property="og:title" content="VTPlayer — Sharper. Smoother. Better.">
+  <meta property="og:description" content="Real-time video enhancement for macOS and iOS.">
+  <meta property="og:image" content="resources/works/vt-player-full.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vtplayer.mqiu.dev">
+  <link rel="shortcut icon" type="image/png" href="resources/favicon.png">
+  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');})();</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{'klein-blue':'#002FA7'},fontFamily:{sans:['Inter','sans-serif'],display:['Syncopate','sans-serif']}}}};</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .vp-hero { min-height: 88vh; display:grid; align-items:center; padding:8rem 0 6rem; }
+    .vp-kicker { color:var(--klein-blue-text); font-family:'Syncopate',sans-serif; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; }
+    .button { display:inline-flex; align-items:center; gap:.55rem; border-radius:999px; padding:.8rem 1.15rem; font-size:.9rem; font-weight:600; transition:transform .25s ease, opacity .25s ease, background .25s ease; }
+    .button:hover { transform:translateY(-2px); opacity:.88; }
+    .button-primary { color:#fff; background:var(--klein-blue); }
+    .button-secondary { color:var(--text-primary); border:1px solid var(--border-color); background:var(--bg-secondary); }
+    .vp-title { font-size:clamp(4rem,12vw,11rem); font-weight:500; letter-spacing:-.08em; line-height:.86; }
+    .vp-video { border:1px solid var(--border-color); border-radius:1.25rem; overflow:hidden; background:#050505; box-shadow:0 2rem 5rem rgba(0,0,0,.16); }
+    .vp-video video { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; }
+    .vp-card { border:1px solid var(--border-color); border-radius:1rem; padding:2rem; background:var(--bg-secondary); }
+    .vp-feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .vp-demo-grid { display:grid; grid-template-columns:1.35fr 1fr; gap:1rem; align-items:start; }
+    .vp-demo-grid img { width:100%; border-radius:.75rem; border:1px solid var(--border-color); }
+    .vp-footer { border-top:1px solid var(--border-color); padding:2rem 0 4rem; }
+    @media (max-width:800px){.vp-feature-grid,.vp-demo-grid{grid-template-columns:1fr}.vp-hero{padding-top:7rem}.vp-title{font-size:clamp(4rem,20vw,8rem)}}
+  </style>
+</head>
+<body>
+  <header class="fixed top-0 left-0 right-0 z-50 glass-strong">
+    <div class="container flex items-center justify-between py-4">
+      <a href="#top" class="font-semibold tracking-tight">VTPlayer</a>
+      <nav class="flex items-center gap-5 text-sm" aria-label="Main navigation">
+        <a href="#features" class="hover:text-klein-blue transition-colors">Features</a>
+        <a href="#demos" class="hover:text-klein-blue transition-colors">Demos</a>
+        <a href="https://github.com/gitmichaelqiu/VTPlayer" class="hover:text-klein-blue transition-colors">GitHub</a>
+        <button id="theme-toggle" class="p-2" aria-label="Toggle color theme"><i data-lucide="sun-moon" width="17"></i></button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="vp-hero container">
+      <div>
+        <div class="vp-kicker mb-6">Native video enhancement · macOS + iOS</div>
+        <h1 class="vp-title">Sharper.<br><span class="gradient-text">Smoother.</span><br>Better.</h1>
+        <div class="max-w-2xl mt-10 flex flex-col gap-6">
+          <p class="paragraph-l">VTPlayer turns Apple silicon into a real-time video enhancement engine.</p>
+          <div class="flex flex-wrap gap-3">
+            <a class="button button-primary" href="https://github.com/gitmichaelqiu/VTPlayer/releases">Download VTPlayer <i data-lucide="arrow-up-right" width="16"></i></a>
+            <a class="button button-secondary" href="#demos">Watch the demos <i data-lucide="play" width="16"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-rk container" id="demos">
+      <div class="tagline-wrapper"><div class="tagline-item col-span-12"><span class="tagline-icon bg-klein-blue rounded-full"></span><span class="text-display text-xs">See it in motion</span></div></div>
+      <div class="vp-video"><video controls muted playsinline preload="metadata" poster="resources/works/vt-player-full.png"><source src="resources/demo/vt-player/video_demo.mp4" type="video/mp4"></video></div>
+      <div class="vp-demo-grid mt-4">
+        <video class="vp-video" controls muted playsinline preload="metadata"><source src="resources/demo/vt-player/iOS_demo.mp4" type="video/mp4"></video>
+        <div class="vp-card"><div class="vp-kicker mb-4">One player, every screen</div><h2 class="heading-l mb-5">From desktop to pocket.</h2><p class="paragraph-m">A PTS-aware playback pipeline keeps enhanced frames and audio together while VideoToolbox handles the heavy lifting.</p></div>
+      </div>
+    </section>
+
+    <section class="section-rk container" id="features">
+      <div class="tagline-wrapper"><div class="tagline-item col-span-12"><span class="tagline-icon bg-klein-blue rounded-full"></span><span class="text-display text-xs">Built for quality</span></div></div>
+      <div class="vp-feature-grid">
+        <article class="vp-card"><i data-lucide="sparkles" class="text-klein-blue mb-8"></i><h3 class="text-2xl font-semibold mb-3">Super Resolution</h3><p class="paragraph-m">Hardware-aware 2x, 4x, and Quality SR modes recover detail without reducing source quality.</p></article>
+        <article class="vp-card"><i data-lucide="wand-sparkles" class="text-klein-blue mb-8"></i><h3 class="text-2xl font-semibold mb-3">Frame Interpolation</h3><p class="paragraph-m">Generate fluid in-between frames with native Apple temporal processing.</p></article>
+        <article class="vp-card"><i data-lucide="sliders-horizontal" class="text-klein-blue mb-8"></i><h3 class="text-2xl font-semibold mb-3">Fine control</h3><p class="paragraph-m">Denoise, motion blur, sharpness, HDR boost, cache limits, and diagnostics are always close at hand.</p></article>
+      </div>
+      <div class="vp-card mt-4 flex flex-col md:flex-row gap-8 items-center"><img src="resources/demo/vt-player/enhancements_light_dark.png" alt="VTPlayer enhancement controls" class="md:w-1/2"><div><div class="vp-kicker mb-4">Made for Apple platforms</div><h2 class="heading-l mb-5">Native by design.</h2><p class="paragraph-m">SwiftUI, AVFoundation, Metal, and VideoToolbox come together in a focused player that feels at home on macOS and iOS.</p></div></div>
+    </section>
+  </main>
+
+  <footer class="vp-footer container flex flex-wrap gap-4 justify-between text-sm"><span>© 2026 Michael Yicheng Qiu</span><span><a href="https://github.com/gitmichaelqiu/VTPlayer">Open source on GitHub</a></span></footer>
+  <script src="scripts/page-transition.js"></script><script src="scripts/particles.js"></script>
+  <script>
+    (function(){
+      var toggle=document.getElementById('theme-toggle');
+      toggle.addEventListener('click',function(){var dark=document.documentElement.classList.toggle('dark');localStorage.setItem('theme',dark?'dark':'light');});
+      lucide.createIcons();
+      if(window.Lenis){var lenis=new Lenis();function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}
+      if(window.gsap){gsap.registerPlugin(ScrollTrigger);gsap.utils.toArray('.vp-card,.vp-video').forEach(function(el){gsap.from(el,{y:28,opacity:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}})})}
+    }());
+  </script>
+</body>
+</html>
