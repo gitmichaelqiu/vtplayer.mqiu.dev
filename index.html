@@ -5,7 +5,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="VTPlayer — Sharper. Smoother. Better.">
     <meta name="twitter:description" content="Real-time video enhancement for macOS and iOS.">
-    <meta name="twitter:image" content="https://desktoprenamer.mqiu.dev/resources/og.png">
+    <meta name="twitter:image" content="https://vtplayer.mqiu.dev/resources/vtplayer-app-icon.png">
     <script>
         (function () { var t = localStorage.getItem('theme'); if (!t) { var m = document.cookie.match(new RegExp('(?:^|; )theme=([^;]*)')); t = m ? decodeURIComponent(m[1]) : null; } if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme:dark)').matches)) document.documentElement.classList.add('dark'); })();
     </script>
@@ -14,11 +14,11 @@
     <title>VTPlayer — Sharper. Smoother. Better.</title>
     <meta property="og:title" content="VTPlayer — Sharper. Smoother. Better.">
     <meta property="og:description" content="Real-time video enhancement for macOS and iOS.">
-    <meta property="og:image" content="https://desktoprenamer.mqiu.dev/resources/og.png">
+    <meta property="og:image" content="https://vtplayer.mqiu.dev/resources/vtplayer-app-icon.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://desktoprenamer.mqiu.dev">
+    <meta property="og:url" content="https://vtplayer.mqiu.dev">
     <link rel="shortcut icon" type="image/png" href="resources/favicon.png">
 
     <!-- Tailwind CSS -->
@@ -107,6 +107,12 @@
         .feature-video {
             animation: video-glow 4s ease-in-out infinite;
         }
+        .feature-slide video {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
 
         /* 3D Icon — same width as main site .hero__logo */
         .hero__icon-3d {
@@ -125,6 +131,11 @@
             display: block;
             width: 100% !important;
             height: 100% !important;
+        }
+        @media (max-width: 768px) {
+            .feature-gallery { height: auto !important; overflow: visible !important; }
+            .feature-slide { position: relative !important; top: auto !important; height: auto !important; min-height: 78vh; padding: 4rem 0; overflow: visible !important; }
+            .feature-slide video { max-height: 42vh; object-fit: cover; }
         }
     </style>
 </head>
@@ -162,7 +173,7 @@
         preloaderEl.addEventListener('touchmove', window.__blockScroll, { passive: false, capture: true });
 
         var RESOURCES = [
-            'resources/favicon.png',
+            'resources/vtplayer-app-icon.png',
             'resources/works/vt-player-full.png',
             'resources/works/vt-player-full-dark.png',
             'resources/works/opt-clicker.png',
@@ -591,7 +602,7 @@
                                     <p class="text-sm font-semibold mb-3" style="font-family: 'Inter', sans-serif; letter-spacing: 0.01em; color: var(--klein-blue-text);">{{ t('features.slide6num') }}</p>
                                     <h3 class="heading-l mb-4" v-html="t('features.slide6title')"></h3>
                                     <p class="text-lg mb-6" style="font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.4; letter-spacing: -0.02em; color: var(--text-primary);">{{ t('features.slide6body') }}</p>
-                                    <a href="https://www.raycast.com/michael_qiu/desktoprenamer" target="_blank" data-btn style="font-size: 1.2rem; letter-spacing: 0em;">
+                                    <a href="https://github.com/gitmichaelqiu/VTPlayer" target="_blank" data-btn style="font-size: 1.2rem; letter-spacing: 0em;">
                                         <div data-btn-bg></div>
                                         <div data-btn-inner :data-text="t('features.slide6btn')">
                                             <span data-btn-text>{{ t('features.slide6btn') }}</span>
@@ -661,7 +672,7 @@
                                 </a>
                                 <span class="self-center" style="font-size: 1.1rem; color: rgba(255,255,255,0.6); font-family: 'Inter', sans-serif; font-weight: 400;">{{ t('install.or') }}</span>
                                 <code class="brew-cmd" style="display: flex; align-items: center; gap: 0.8rem; padding: 1.0rem 1.2rem 1.0rem 1.8rem; font-size: 0.9rem; letter-spacing: 0.02em; background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); word-break: break-all;">
-                                    brew install --cask gitmichaelqiu/tap/desktoprenamer
+                                    brew install --cask gitmichaelqiu/tap/vtplayer
                                     <button @click="copyBrew" :title="t('install.copy')"
                                         style="flex-shrink: 0; width: 2.2rem; height: 2.2rem; display: flex; align-items: center; justify-content: center; border-radius: 4px; color: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.2s ease;"
                                         onmouseenter="this.style.background='rgba(255,255,255,0.15)'; this.style.color='rgba(255,255,255,1)';"
@@ -1111,7 +1122,7 @@
                     applyTheme(resolveTheme() === 'dark');
 
                     function copyBrew() {
-                        navigator.clipboard.writeText('brew install --cask gitmichaelqiu/tap/desktoprenamer').then(function () {
+                        navigator.clipboard.writeText('brew install --cask gitmichaelqiu/tap/vtplayer').then(function () {
                             brewCopied.value = true;
                             setTimeout(function () { brewCopied.value = false; }, 1500);
                         }).catch(function () {});
@@ -1184,7 +1195,7 @@
                         var materialSide = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.2, metalness: 0.8 });
                         var materialFront = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2, metalness: 0.1 });
                         var textureLoader = new THREE.TextureLoader();
-                        textureLoader.load('resources/favicon.png', function (tex) {
+                        textureLoader.load('resources/vtplayer-app-icon.png', function (tex) {
                             tex.center.set(0.5, 0.5);
                             tex.encoding = THREE.sRGBEncoding;
                             materialFront.map = tex;
