@@ -1449,6 +1449,8 @@
 
                         nextTick().then(function () {
                             lucide.createIcons();
+                            // Apply the resolved system theme after Vue has rendered theme-aware images.
+                            syncThemeImages(isDark.value);
 
                             // Prevent Safari fullscreen from triggering all videos
                             var allVideos = document.querySelectorAll('video');
