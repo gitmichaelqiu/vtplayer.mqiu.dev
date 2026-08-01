@@ -100,12 +100,6 @@
 
     <link rel="stylesheet" href="styles/main.css">
     <style>
-      .hero__quicknav-logo a svg { display:none; }
-      .hero__quicknav-logo a::after { content:'VTPlayer'; color:#fff; font:700 1rem/1 'Inter',sans-serif; letter-spacing:-.06em; }
-      footer .md\:col-span-5 > a svg { display:none; }
-      footer .md\:col-span-5 > a::after { content:'VTPlayer'; color:#fff; font:700 1.4rem/1 'Inter',sans-serif; letter-spacing:-.06em; }
-    </style>
-    <style>
         @keyframes video-glow {
             0%, 100% { box-shadow: 0 0 30px rgba(0,47,167,0.15), 0 20px 60px rgba(0,0,0,0.15); }
             50% { box-shadow: 0 0 50px rgba(0,47,167,0.25), 0 20px 60px rgba(0,0,0,0.2); }
@@ -168,9 +162,9 @@
         preloaderEl.addEventListener('touchmove', window.__blockScroll, { passive: false, capture: true });
 
         var RESOURCES = [
-            'resources/works/desktop-renamer.png',
-            'resources/works/desktop-renamer-full.png',
-            'resources/works/desktop-renamer-full-dark.png',
+            'resources/favicon.png',
+            'resources/works/vt-player-full.png',
+            'resources/works/vt-player-full-dark.png',
             'resources/works/opt-clicker.png',
             'resources/works/opt-clicker-full.png',
             'resources/works/opt-clicker-full-dark.png',
@@ -443,21 +437,10 @@
                         <i data-lucide="x" class="w-6 h-6"></i>
                     </button>
                     <div class="video-modal-content relative">
-                        <video v-show="modalVideoSrc === 'resources/demo/vt-player/video_demo.mp4'"
-                            src="resources/demo/vt-player/video_demo.mp4" controls playsinline preload="auto"
+                        <video :src="modalVideoSrc" controls playsinline preload="metadata"
                             class="max-w-[90vw] max-h-[85vh] rounded-lg block"
                             style="box-shadow: 0 25px 80px rgba(0,0,0,0.5); background: transparent;"
                             ref="modalVideoReel"></video>
-                        <video v-show="modalVideoSrc === 'resources/demo/vt-player/iOS_demo.mp4'"
-                            src="resources/demo/vt-player/iOS_demo.mp4" controls playsinline preload="auto"
-                            class="max-w-[90vw] max-h-[85vh] rounded-lg block"
-                            style="box-shadow: 0 25px 80px rgba(0,0,0,0.5); background: transparent;"
-                            ref="modalVideoBatch"></video>
-                        <video v-show="modalVideoSrc === 'resources/demo/vt-player/video_demo.mp4'"
-                            src="resources/demo/vt-player/video_demo.mp4" controls playsinline preload="auto"
-                            class="max-w-[90vw] max-h-[85vh] rounded-lg block"
-                            style="box-shadow: 0 25px 80px rgba(0,0,0,0.5); background: transparent;"
-                            ref="modalVideoLock"></video>
                     </div>
                 </div>
             </transition>
@@ -1035,8 +1018,6 @@
                     var navDockBottom = ref('2rem');
                     var showVideoModal = ref(false);
                     var modalVideoReel = ref(null);
-                    var modalVideoBatch = ref(null);
-                    var modalVideoLock = ref(null);
                     var modalVideoSrc = ref('resources/demo/vt-player/video_demo.mp4');
                     var raycastVideo = ref(null);
                     var lockVideo = ref(null);
@@ -1203,7 +1184,7 @@
                         var materialSide = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.2, metalness: 0.8 });
                         var materialFront = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2, metalness: 0.1 });
                         var textureLoader = new THREE.TextureLoader();
-                        textureLoader.load('resources/works/vt-player-full.png', function (tex) {
+                        textureLoader.load('resources/favicon.png', function (tex) {
                             tex.center.set(0.5, 0.5);
                             tex.encoding = THREE.sRGBEncoding;
                             materialFront.map = tex;
@@ -1281,39 +1262,15 @@
                             nextTick(function () {
                                 nextTick(function () {
                                     lucide.createIcons();
-                                    if (modalVideoSrc.value === 'resources/demo/vt-player/iOS_demo.mp4') {
-                                        if (modalVideoReel.value) { modalVideoReel.value.pause(); }
-                                        if (modalVideoLock.value) { modalVideoLock.value.pause(); }
-                                        if (modalVideoBatch.value) {
-                                            modalVideoBatch.value.currentTime = 0;
-                                            modalVideoBatch.value.play().catch(function () {});
-                                        }
-                                    } else if (modalVideoSrc.value === 'resources/demo/vt-player/video_demo.mp4') {
-                                        if (modalVideoReel.value) { modalVideoReel.value.pause(); }
-                                        if (modalVideoBatch.value) { modalVideoBatch.value.pause(); }
-                                        if (modalVideoLock.value) {
-                                            modalVideoLock.value.currentTime = 0;
-                                            modalVideoLock.value.play().catch(function () {});
-                                        }
-                                    } else {
-                                        if (modalVideoBatch.value) { modalVideoBatch.value.pause(); }
-                                        if (modalVideoLock.value) { modalVideoLock.value.pause(); }
-                                        if (modalVideoReel.value) {
-                                            modalVideoReel.value.currentTime = 0;
-                                            modalVideoReel.value.play().catch(function () {});
-                                        }
+                                    if (modalVideoReel.value) {
+                                        modalVideoReel.value.currentTime = 0;
+                                        modalVideoReel.value.play().catch(function () {});
                                     }
                                 });
                             });
                         } else {
                             if (modalVideoReel.value) {
                                 modalVideoReel.value.pause();
-                            }
-                            if (modalVideoBatch.value) {
-                                modalVideoBatch.value.pause();
-                            }
-                            if (modalVideoLock.value) {
-                                modalVideoLock.value.pause();
                             }
                             if (modalVideoSrc.value === 'resources/demo/vt-player/iOS_demo.mp4' && raycastVideo.value) {
                                 raycastVideo.value.play().catch(function () {});
@@ -1659,8 +1616,6 @@
                         openRaycastVideo: openRaycastVideo,
                         closeVideoModal: closeVideoModal,
                         modalVideoReel: modalVideoReel,
-                        modalVideoBatch: modalVideoBatch,
-                        modalVideoLock: modalVideoLock,
                         modalVideoSrc: modalVideoSrc,
                         raycastVideo: raycastVideo,
                         lockVideo: lockVideo,
