@@ -808,8 +808,8 @@
                 var sweep = (time * 0.00008) % 1;
 
                 var focusGlow = ctx.createRadialGradient(width * 0.5, height * 0.48, 0, width * 0.5, height * 0.48, Math.min(width, height) * 0.42);
-                focusGlow.addColorStop(0, 'rgba(' + baseColor + ',0.07)');
-                focusGlow.addColorStop(0.55, 'rgba(' + baseColor + ',0.025)');
+                focusGlow.addColorStop(0, 'rgba(' + baseColor + ',0.12)');
+                focusGlow.addColorStop(0.55, 'rgba(' + baseColor + ',0.045)');
                 focusGlow.addColorStop(1, 'rgba(' + baseColor + ',0)');
                 ctx.fillStyle = focusGlow;
                 ctx.fillRect(0, 0, width, height);
@@ -818,8 +818,8 @@
                     var y = bandPositions[b] * height;
                     var gradient = ctx.createLinearGradient(0, y, width, y);
                     gradient.addColorStop(0, 'rgba(' + baseColor + ',0)');
-                    gradient.addColorStop(0.3, 'rgba(' + baseColor + ',0.10)');
-                    gradient.addColorStop(0.7, 'rgba(' + baseColor + ',0.10)');
+                    gradient.addColorStop(0.3, 'rgba(' + baseColor + ',0.16)');
+                    gradient.addColorStop(0.7, 'rgba(' + baseColor + ',0.16)');
                     gradient.addColorStop(1, 'rgba(' + baseColor + ',0)');
                     ctx.strokeStyle = gradient;
                     ctx.lineWidth = isDark ? 1.1 : 0.9;
@@ -831,7 +831,7 @@
                     var beamX = ((sweep + b * 0.19) % 1) * width;
                     var beamGradient = ctx.createLinearGradient(beamX - 80, y, beamX + 80, y);
                     beamGradient.addColorStop(0, 'rgba(' + baseColor + ',0)');
-                    beamGradient.addColorStop(0.5, 'rgba(' + baseColor + ',' + (0.16 + pulse * 0.08).toFixed(3) + ')');
+                    beamGradient.addColorStop(0.5, 'rgba(' + baseColor + ',' + (0.25 + pulse * 0.1).toFixed(3) + ')');
                     beamGradient.addColorStop(1, 'rgba(' + baseColor + ',0)');
                     ctx.strokeStyle = beamGradient;
                     ctx.lineWidth = isDark ? 2 : 1.5;
@@ -844,7 +844,7 @@
                 var scanX = sweep * width;
                 var scanGradient = ctx.createLinearGradient(0, 0, 0, height);
                 scanGradient.addColorStop(0, 'rgba(' + baseColor + ',0)');
-                scanGradient.addColorStop(0.5, 'rgba(' + baseColor + ',0.06)');
+                scanGradient.addColorStop(0.5, 'rgba(' + baseColor + ',0.1)');
                 scanGradient.addColorStop(1, 'rgba(' + baseColor + ',0)');
                 ctx.strokeStyle = scanGradient;
                 ctx.lineWidth = 1;
@@ -858,7 +858,7 @@
                     m.x += m.speed * (width / 2);
                     if (m.x > width + 30) m.x = -30;
                     var markerY = bandPositions[m.band] * height + Math.sin(time * 0.001 + m.phase) * 12;
-                    var markerAlpha = 0.15 + pulse * 0.1;
+                    var markerAlpha = 0.24 + pulse * 0.12;
                     ctx.strokeStyle = 'rgba(' + baseColor + ',' + markerAlpha.toFixed(3) + ')';
                     ctx.lineWidth = 1;
                     ctx.strokeRect(m.x, markerY - m.size * 0.5, m.size * 2.4, m.size);
