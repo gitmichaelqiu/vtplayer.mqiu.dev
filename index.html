@@ -451,10 +451,33 @@
             <!-- Demo Video Section -->
             <section id="demo" class="relative w-full" style="border-top: none;">
                 <div class="relative w-full overflow-hidden bg-deep-navy" style="aspect-ratio: 16/9;">
-                    <video src="resources/demo/vt-player/video_demo.mp4" autoplay muted loop controls playsinline class="absolute inset-0 w-full h-full object-cover"></video>
+                    <video src="resources/demo/vt-player/video_demo.mp4" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"></video>
                     <div class="absolute bottom-0 left-0 right-0 pointer-events-none" style="height: 60%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 12%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.03) 55%, transparent 100%);"></div>
+                    <button type="button" @click.prevent="openVideoModal('resources/demo/vt-player/video_demo.mp4')"
+                        class="absolute bottom-6 right-6 z-10 flex items-center gap-2 px-5 py-3 rounded-full text-white text-sm font-medium transition-all duration-300 hover:scale-105"
+                        style="background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); font-family: 'Inter', sans-serif; letter-spacing: 0.02em; cursor: pointer;">
+                        <i data-lucide="play" class="w-4 h-4 fill-white"></i>
+                        {{ t('demo.watch') }}
+                    </button>
                 </div>
             </section>
+
+            <transition name="video-modal">
+                <div v-if="showVideoModal" @click.self="closeVideoModal"
+                    class="fixed inset-0 z-[10003] flex items-center justify-center p-8"
+                    style="background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
+                    <button @click="closeVideoModal"
+                        class="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center rounded-full text-white transition-all duration-300 hover:scale-110"
+                        style="background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); cursor: pointer;"
+                        :aria-label="t('demo.close')">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                    <video :src="modalVideoSrc" controls playsinline preload="auto"
+                        class="max-w-[90vw] max-h-[85vh] rounded-lg block"
+                        style="box-shadow: 0 25px 80px rgba(0,0,0,0.5); background: transparent;"
+                        ref="modalVideoReel"></video>
+                </div>
+            </transition>
 
             <!-- Features Section — sticky slide gallery -->
             <section id="features" class="section-rk">
@@ -934,6 +957,9 @@
                     var activeSection = ref('home');
                     var showNavDock = ref(false);
                     var navDockBottom = ref('2rem');
+                    var showVideoModal = ref(false);
+                    var modalVideoReel = ref(null);
+                    var modalVideoSrc = ref('resources/demo/vt-player/video_demo.mp4');
                     var brewCopied = ref(false);
                     var icon3dContainer = ref(null);
                     var waveCanvas = ref(null);
@@ -1152,6 +1178,29 @@
                         if (isSidebarOpen.value) return;
                         if (lenis) lenis.scrollTo(0, { duration: 1.2 });
                     }
+
+                    function openVideoModal(src) {
+                        modalVideoSrc.value = src || 'resources/demo/vt-player/video_demo.mp4';
+                        showVideoModal.value = true;
+                    }
+
+                    function closeVideoModal() {
+                        showVideoModal.value = false;
+                    }
+
+                    watch(showVideoModal, function (val) {
+                        if (val) {
+                            nextTick(function () {
+                                lucide.createIcons();
+                                if (modalVideoReel.value) {
+                                    modalVideoReel.value.currentTime = 0;
+                                    modalVideoReel.value.play().catch(function () {});
+                                }
+                            });
+                        } else if (modalVideoReel.value) {
+                            modalVideoReel.value.pause();
+                        }
+                    });
 
                     // ── Sidebar ──
 
@@ -1479,6 +1528,11 @@
                         scrollToTop: scrollToTop,
                         showNavDock: showNavDock,
                         navDockBottom: navDockBottom,
+                        showVideoModal: showVideoModal,
+                        modalVideoSrc: modalVideoSrc,
+                        modalVideoReel: modalVideoReel,
+                        openVideoModal: openVideoModal,
+                        closeVideoModal: closeVideoModal,
                         sectionLabels: sectionLabels,
                         isDark: isDark,
                         themeMode: themeMode,
