@@ -887,12 +887,12 @@ html.dark .work-card:hover::before {
 .footer-nav-subtitle {
     margin: -0.15rem 0 0.35rem;
     color: currentColor;
-    font-family: 'Playfair Display', serif;
-    font-size: 0.78em;
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68em;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
     opacity: 0.65;
 }
 
