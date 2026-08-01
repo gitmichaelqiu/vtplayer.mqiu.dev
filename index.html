@@ -119,12 +119,18 @@
             object-fit: contain;
         }
         .feature-ios-video {
-            width: auto !important;
-            max-width: 100%;
-            height: min(70vh, 42rem);
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: fill !important;
+        }
+        .feature-ios-frame {
+            width: min(100%, calc(min(70vh, 42rem) * 1180 / 2556));
+            aspect-ratio: 1180 / 2556;
             margin: 0 auto;
-            aspect-ratio: 9 / 16;
-            object-fit: contain !important;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            background: #000;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
         .feature-frame {
             overflow: hidden;
@@ -155,7 +161,7 @@
             .feature-gallery { height: auto !important; overflow: visible !important; }
             .feature-slide { position: relative !important; top: auto !important; height: auto !important; min-height: 78vh; padding: 4rem 0; overflow: visible !important; }
             .feature-slide video { max-height: 42vh; object-fit: cover; }
-            .feature-ios-video { height: 62vh; max-height: none !important; }
+            .feature-ios-frame { width: min(100%, calc(62vh * 1180 / 2556)); }
         }
     </style>
 </head>
@@ -492,8 +498,9 @@
                         <div class="container" style="width: 100%;">
                             <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
                                 <div class="md:col-span-7">
-                                    <video src="resources/demo/vt-player/iOS_demo.mp4" autoplay muted loop playsinline
-                                        class="feature-ios-video rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);"></video>
+                                    <div class="feature-ios-frame">
+                                        <video src="resources/demo/vt-player/iOS_demo.mp4" autoplay muted loop playsinline class="feature-ios-video"></video>
+                                    </div>
                                 </div>
                                 <div class="md:col-span-5 md:pl-16">
                                     <p class="text-sm font-semibold mb-3" style="font-family: 'Inter', sans-serif; letter-spacing: 0.01em; color: var(--klein-blue-text);">{{ t('features.slide2num') }}</p>
