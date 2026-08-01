@@ -879,7 +879,19 @@ html.dark .work-card:hover::before {
     font-weight: 600;
     letter-spacing: 0.02em;
     vertical-align: middle;
-    opacity: 0.75;
+    color: inherit;
+    opacity: 1;
+}
+
+.hero__quicknav-subtitle,
+.footer-nav-subtitle {
+    margin: -0.15rem 0 0.35rem;
+    color: currentColor;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    opacity: 0.65;
 }
 
 .work-meta {
