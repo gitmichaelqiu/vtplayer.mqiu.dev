@@ -227,7 +227,7 @@
         if (markWrap && textEl) {
             try {
                 var domainWidth = textEl.getBBox().width;
-                markWrap.style.setProperty('--dot-scale', Math.max(1, Math.min(1.55, domainWidth / 180)));
+                markWrap.style.setProperty('--dot-x-scale', Math.max(1, Math.min(1.55, domainWidth / 180)));
             } catch (e) {}
         }
 
