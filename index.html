@@ -107,6 +107,9 @@
         .feature-video {
             animation: video-glow 4s ease-in-out infinite;
         }
+        .companions-grid .work-card:nth-child(even) {
+            padding-top: 4rem !important;
+        }
         .feature-slide video {
             display: block;
             width: 100%;
@@ -628,7 +631,7 @@
                         <div class="content-label">
                             <svg class="section-label-icon" viewBox="0 0 14 14" fill="currentColor">
                                 <path d="M0 0L14 14H0V0Z" />
-                            </svg>{{ t('companions.label') }}
+                            </svg>{{ t('companions.label') }} <span class="suite-label">{{ t('companions.suiteLabel') }}</span>
                         </div>
                         <div class="content-body">
                             <div class="mask-wrap">
@@ -637,7 +640,7 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-0" style="border-left: 1px solid var(--border-color);">
+                    <div class="companions-grid grid grid-cols-1 md:grid-cols-3 gap-0" style="border-left: 1px solid var(--border-color);">
                         <!-- DesktopRenamer -->
                         <div class="work-card" data-hover-follow
                             style="border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
@@ -654,22 +657,6 @@
                             <img src="resources/works/desktop-renamer.png" data-hover-follower class="card-subimg">
                         </div>
 
-                        <!-- SpaceSwitcher -->
-                        <div class="work-card" data-hover-follow
-                            style="border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
-                            <h3 class="heading-l text-4xl">{{ t('companions.spaceswitcherTitle') }}</h3>
-                            <p class="paragraph-m max-w-sm" style="color: var(--text-primary); font-family: 'Inter', sans-serif;">{{ t('companions.spaceswitcherBody') }}</p>
-                            <div class="work-meta">
-                                <a href="https://spaceswitcher.mqiu.dev" target="_blank" data-btn class="ml-auto" style="font-size: 1.2rem; letter-spacing: 0em;">
-                                    <div data-btn-bg></div>
-                                    <div data-btn-inner :data-text="t('companions.learnMore')">
-                                        <span data-btn-text>{{ t('companions.learnMore') }}</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <img src="resources/works/space-switcher.png" data-hover-follower class="card-subimg">
-                        </div>
-
                         <!-- OptClicker -->
                         <div class="work-card" data-hover-follow
                             style="border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
@@ -684,6 +671,22 @@
                                 </a>
                             </div>
                             <img src="resources/works/opt-clicker.png" data-hover-follower class="card-subimg">
+                        </div>
+
+                        <!-- SpaceSwitcher -->
+                        <div class="work-card" data-hover-follow
+                            style="border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+                            <h3 class="heading-l text-4xl">{{ t('companions.spaceswitcherTitle') }}</h3>
+                            <p class="paragraph-m max-w-sm" style="color: var(--text-primary); font-family: 'Inter', sans-serif;">{{ t('companions.spaceswitcherBody') }}</p>
+                            <div class="work-meta">
+                                <a href="https://spaceswitcher.mqiu.dev" target="_blank" data-btn class="ml-auto" style="font-size: 1.2rem; letter-spacing: 0em;">
+                                    <div data-btn-bg></div>
+                                    <div data-btn-inner :data-text="t('companions.learnMore')">
+                                        <span data-btn-text>{{ t('companions.learnMore') }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <img src="resources/works/space-switcher.png" data-hover-follower class="card-subimg">
                         </div>
                     </div>
                 </div>
