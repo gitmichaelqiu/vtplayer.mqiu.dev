@@ -371,7 +371,7 @@
             <!-- Hero Section -->
             <section id="home" class="hero">
                 <div class="hero__bg"></div>
-                <canvas ref="waveCanvas" class="absolute inset-0 z-[1] pointer-events-none"></canvas>
+                <canvas ref="signalCanvas" class="absolute inset-0 z-[1] pointer-events-none"></canvas>
                 <nav class="hero__quicknav hide-mobile">
                     <div class="hero__quicknav-logo">
                         <a href="/" aria-label="Michael Qiu Home" style="cursor:pointer!important">
@@ -776,27 +776,26 @@
          * VTPlayer landing page — shared Vue, GSAP, and Lenis site shell.
          */
 
-        // ── Canvas Wave Lines ──
-        function initWaves(canvas) {
+        // ── Video Signal Field ──
+        function initSignalField(canvas) {
             if (!canvas) return;
             var ctx = canvas.getContext('2d');
             var width, height;
-            var lines = [];
-            var lineCount = 7;
+            var markers = [];
+            var bandPositions = [0.22, 0.5, 0.78];
 
             function resize() {
                 var rect = canvas.parentElement.getBoundingClientRect();
                 width = canvas.width = rect.width;
                 height = canvas.height = rect.height;
-                lines = [];
-                for (var i = 0; i < lineCount; i++) {
-                    lines.push({
-                        y: (i / (lineCount - 1)) * height,
-                        amp: 15 + Math.random() * 40,
-                        freq: 0.003 + Math.random() * 0.005,
-                        speed: 0.3 + Math.random() * 0.7,
-                        phase: Math.random() * Math.PI * 2,
-                        offset: (Math.random() - 0.5) * 60
+                markers = [];
+                for (var i = 0; i < 24; i++) {
+                    markers.push({
+                        x: Math.random() * width,
+                        band: Math.floor(Math.random() * bandPositions.length),
+                        size: 3 + Math.random() * 7,
+                        speed: 0.012 + Math.random() * 0.025,
+                        phase: Math.random() * Math.PI * 2
                     });
                 }
             }
@@ -804,22 +803,33 @@
             function draw(time) {
                 ctx.clearRect(0, 0, width, height);
                 var isDark = document.documentElement.classList.contains('dark');
-                var baseAlpha = 0.12;
-                var baseColor = '255,255,255';
+                var baseColor = isDark ? '210,235,255' : '255,255,255';
+                var pulse = (Math.sin(time * 0.0012) + 1) * 0.5;
 
-                for (var i = 0; i < lines.length; i++) {
-                    var l = lines[i];
-                    var alpha = baseAlpha * (1 - Math.abs(i - lineCount / 2) / (lineCount / 2) * 0.5);
+                for (var b = 0; b < bandPositions.length; b++) {
+                    var y = bandPositions[b] * height;
+                    var gradient = ctx.createLinearGradient(0, y, width, y);
+                    gradient.addColorStop(0, 'rgba(' + baseColor + ',0)');
+                    gradient.addColorStop(0.3, 'rgba(' + baseColor + ',0.10)');
+                    gradient.addColorStop(0.7, 'rgba(' + baseColor + ',0.10)');
+                    gradient.addColorStop(1, 'rgba(' + baseColor + ',0)');
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = isDark ? 1.1 : 0.9;
                     ctx.beginPath();
-                    ctx.strokeStyle = 'rgba(' + baseColor + ',' + alpha.toFixed(3) + ')';
-                    ctx.lineWidth = isDark ? 1.2 : 1;
-                    var first = true;
-                    for (var x = -20; x <= width + 20; x += 2) {
-                        var y = l.y + Math.sin(x * l.freq + time * 0.001 * l.speed + l.phase) * l.amp + l.offset;
-                        if (first) { ctx.moveTo(x, y); first = false; }
-                        else { ctx.lineTo(x, y); }
-                    }
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(width, y);
                     ctx.stroke();
+                }
+
+                for (var i = 0; i < markers.length; i++) {
+                    var m = markers[i];
+                    m.x += m.speed * (width / 2);
+                    if (m.x > width + 30) m.x = -30;
+                    var markerY = bandPositions[m.band] * height + Math.sin(time * 0.001 + m.phase) * 12;
+                    var markerAlpha = 0.12 + pulse * 0.08;
+                    ctx.strokeStyle = 'rgba(' + baseColor + ',' + markerAlpha.toFixed(3) + ')';
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(m.x, markerY - m.size * 0.5, m.size * 2.4, m.size);
                 }
                 requestAnimationFrame(draw);
             }
@@ -982,7 +992,7 @@
                     var modalVideoSrc = ref('resources/demo/vt-player/video_demo.mp4');
                     var brewCopied = ref(false);
                     var icon3dContainer = ref(null);
-                    var waveCanvas = ref(null);
+                    var signalCanvas = ref(null);
 
                     var lenis;
                     var scrollRafPending = false;
@@ -1389,7 +1399,7 @@
                     onMounted(function () {
                         initLenis();
                         initIcon3D();
-                        initWaves(waveCanvas.value);
+                        initSignalField(signalCanvas.value);
                         window.addEventListener('scroll', onScroll, { passive: true });
                         systemQuery.addEventListener('change', onSystemThemeChange);
 
@@ -1560,7 +1570,7 @@
                         copyBrew: copyBrew,
                         brewCopied: brewCopied,
                         icon3dContainer: icon3dContainer,
-                        waveCanvas: waveCanvas,
+                        signalCanvas: signalCanvas,
                         lang: lang,
                         setLang: setLang,
                         t: t,
