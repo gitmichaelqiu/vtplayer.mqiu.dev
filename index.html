@@ -110,8 +110,30 @@
         .feature-slide video {
             display: block;
             width: 100%;
-            aspect-ratio: 16 / 9;
             object-fit: cover;
+        }
+        .feature-slide img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        .feature-ios-video {
+            width: auto !important;
+            max-width: 100%;
+            height: min(70vh, 42rem);
+            margin: 0 auto;
+            aspect-ratio: 9 / 16;
+            object-fit: contain !important;
+        }
+        .feature-copy-card {
+            min-height: 20rem;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(0,47,167,0.12), rgba(255,255,255,0.72));
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        .feature-copy-card--diagnostics {
+            background: linear-gradient(135deg, rgba(0,0,0,0.08), rgba(0,47,167,0.18));
         }
 
         /* 3D Icon — same width as main site .hero__logo */
@@ -136,6 +158,7 @@
             .feature-gallery { height: auto !important; overflow: visible !important; }
             .feature-slide { position: relative !important; top: auto !important; height: auto !important; min-height: 78vh; padding: 4rem 0; overflow: visible !important; }
             .feature-slide video { max-height: 42vh; object-fit: cover; }
+            .feature-ios-video { height: 62vh; max-height: none !important; }
         }
     </style>
 </head>
@@ -425,36 +448,10 @@
             <!-- Demo Video Section -->
             <section id="demo" class="relative w-full" style="border-top: none;">
                 <div class="relative w-full overflow-hidden bg-deep-navy" style="aspect-ratio: 16/9;">
-                    <video src="resources/demo/vt-player/video_demo.mp4" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"></video>
+                    <video src="resources/demo/vt-player/video_demo.mp4" autoplay muted loop controls playsinline class="absolute inset-0 w-full h-full object-cover"></video>
                     <div class="absolute bottom-0 left-0 right-0 pointer-events-none" style="height: 60%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 12%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.03) 55%, transparent 100%);"></div>
-                    <button type="button" @click.prevent="openVideoModal('resources/demo/vt-player/video_demo.mp4')"
-                        class="absolute bottom-6 right-6 z-10 flex items-center gap-2 px-5 py-3 rounded-full text-white text-sm font-medium transition-all duration-300 hover:scale-105"
-                        style="background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); font-family: 'Inter', sans-serif; letter-spacing: 0.02em; cursor: pointer;">
-                        <i data-lucide="play" class="w-4 h-4 fill-white"></i>
-                        {{ t('demo.watch') }}
-                    </button>
                 </div>
             </section>
-
-            <!-- Video Modal Overlay -->
-            <transition name="video-modal">
-                <div v-if="showVideoModal" @click.self="closeVideoModal"
-                    class="fixed inset-0 z-[10003] flex items-center justify-center p-8"
-                    style="background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
-                    <button @click="closeVideoModal"
-                        class="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center rounded-full text-white transition-all duration-300 hover:scale-110"
-                        style="background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); cursor: pointer;"
-                        :aria-label="t('demo.close')">
-                        <i data-lucide="x" class="w-6 h-6"></i>
-                    </button>
-                    <div class="video-modal-content relative">
-                        <video :src="modalVideoSrc" controls playsinline preload="metadata"
-                            class="max-w-[90vw] max-h-[85vh] rounded-lg block"
-                            style="box-shadow: 0 25px 80px rgba(0,0,0,0.5); background: transparent;"
-                            ref="modalVideoReel"></video>
-                    </div>
-                </div>
-            </transition>
 
             <!-- Features Section — sticky slide gallery -->
             <section id="features" class="section-rk">
@@ -485,8 +482,7 @@
                                     <p class="text-lg" style="font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.4; letter-spacing: -0.02em; color: var(--text-primary);">{{ t('features.slide1body') }}</p>
                                 </div>
                                 <div class="md:col-span-7">
-                                    <video src="resources/demo/vt-player/video_demo.mp4" autoplay muted loop playsinline
-                                        class="w-full rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);"></video>
+                                    <img src="resources/demo/vt-player/mac_settings_dark.png" alt="VTPlayer macOS settings" class="rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
                                 </div>
                             </div>
                         </div>
@@ -497,12 +493,8 @@
                         <div class="container" style="width: 100%;">
                             <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
                                 <div class="md:col-span-7">
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <video src="resources/demo/vt-player/video_demo.mp4" autoplay muted loop playsinline
-                                            class="w-full rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);"></video>
-                                        <video src="resources/demo/vt-player/iOS_demo.mp4" autoplay muted loop playsinline
-                                            class="w-full rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);"></video>
-                                    </div>
+                                    <video src="resources/demo/vt-player/iOS_demo.mp4" autoplay muted loop playsinline
+                                        class="feature-ios-video rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);"></video>
                                 </div>
                                 <div class="md:col-span-5 md:pl-16">
                                     <p class="text-sm font-semibold mb-3" style="font-family: 'Inter', sans-serif; letter-spacing: 0.01em; color: var(--klein-blue-text);">{{ t('features.slide2num') }}</p>
@@ -523,12 +515,7 @@
                                     <p class="text-lg" style="font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.4; letter-spacing: -0.02em; color: var(--text-primary);">{{ t('features.slide3body') }}</p>
                                 </div>
                                 <div class="md:col-span-7">
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <video src="resources/demo/vt-player/iOS_demo.mp4" autoplay muted loop playsinline
-                                            class="w-full rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);"></video>
-                                        <video src="resources/demo/vt-player/video_demo.mp4" autoplay muted loop playsinline
-                                            class="w-full rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);"></video>
-                                    </div>
+                                    <img src="resources/demo/vt-player/enhancements_light_dark.png" alt="VTPlayer enhancement controls" class="rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
                                 </div>
                             </div>
                         </div>
@@ -539,8 +526,7 @@
                         <div class="container" style="width: 100%;">
                             <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
                                 <div class="md:col-span-7">
-                                    <video src="resources/demo/vt-player/video_demo.mp4" autoplay muted loop playsinline
-                                        class="w-full rounded-lg feature-video" style="max-width: 640px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);"></video>
+                                    <img src="resources/demo/vt-player/mac_settings_light.png" alt="VTPlayer macOS playback settings" class="rounded-lg feature-video" style="max-width: 640px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
                                 </div>
                                 <div class="md:col-span-5 md:pl-16">
                                     <p class="text-sm font-semibold mb-3" style="font-family: 'Inter', sans-serif; letter-spacing: 0.01em; color: var(--klein-blue-text);">{{ t('features.slide4num') }}</p>
@@ -561,19 +547,7 @@
                                     <p class="text-lg mb-6" style="font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.4; letter-spacing: -0.02em; color: var(--text-primary);">{{ t('features.slide5body') }}</p>
                                 </div>
                                 <div class="md:col-span-7">
-                                    <div class="relative w-full overflow-hidden rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
-                                        <video src="resources/demo/vt-player/video_demo.mp4" autoplay muted loop playsinline
-                                            class="w-full"
-                                            style="display: block;"
-                                            ref="lockVideo"></video>
-                                        <div class="absolute bottom-0 left-0 right-0 pointer-events-none" style="height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 20%, rgba(0,0,0,0.05) 50%, transparent 100%);"></div>
-                                        <button type="button" @click.prevent="openLockVideo"
-                                            class="absolute bottom-6 right-6 z-10 flex items-center gap-2 px-5 py-3 rounded-full text-white text-sm font-medium transition-all duration-300 hover:scale-105"
-                                            style="background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); font-family: 'Inter', sans-serif; letter-spacing: 0.02em; cursor: pointer;">
-                                            <i data-lucide="play" class="w-4 h-4 fill-white"></i>
-                                            {{ t('features.slide5watch') }}
-                                        </button>
-                                    </div>
+                                    <div class="feature-copy-card" aria-hidden="true"></div>
                                 </div>
                             </div>
                         </div>
@@ -584,19 +558,7 @@
                         <div class="container" style="width: 100%;">
                             <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
                                 <div class="md:col-span-7">
-                                    <div class="relative w-full overflow-hidden rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
-                                        <video src="resources/demo/vt-player/iOS_demo.mp4" autoplay muted loop playsinline
-                                            class="w-full"
-                                            style="display: block;"
-                                            ref="raycastVideo"></video>
-                                        <div class="absolute bottom-0 left-0 right-0 pointer-events-none" style="height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 20%, rgba(0,0,0,0.05) 50%, transparent 100%);"></div>
-                                        <button type="button" @click.prevent="openRaycastVideo"
-                                            class="absolute bottom-6 right-6 z-10 flex items-center gap-2 px-5 py-3 rounded-full text-white text-sm font-medium transition-all duration-300 hover:scale-105"
-                                            style="background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); font-family: 'Inter', sans-serif; letter-spacing: 0.02em; cursor: pointer;">
-                                            <i data-lucide="play" class="w-4 h-4 fill-white"></i>
-                                            {{ t('features.slide6watch') }}
-                                        </button>
-                                    </div>
+                                    <div class="feature-copy-card feature-copy-card--diagnostics" aria-hidden="true"></div>
                                 </div>
                                 <div class="md:col-span-5 md:pl-16">
                                     <p class="text-sm font-semibold mb-3" style="font-family: 'Inter', sans-serif; letter-spacing: 0.01em; color: var(--klein-blue-text);">{{ t('features.slide6num') }}</p>
@@ -629,16 +591,6 @@
                         </div>
                     </div>
 
-                    <div class="content-grid mb-16">
-                        <div class="content-label" style="font-size: 1.1rem; font-weight: 500; letter-spacing: -0.02em;">
-                            {{ t('moreFeatures.widgetLabel') }}
-                        </div>
-                        <div class="content-body">
-                            <div class="mask-wrap">
-                                <p class="paragraph-m max-w-2xl mask-inner" style="color: var(--text-primary); font-family: 'Inter', sans-serif;">{{ t('moreFeatures.widgetBody') }}</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -1027,11 +979,6 @@
                     var activeSection = ref('home');
                     var showNavDock = ref(false);
                     var navDockBottom = ref('2rem');
-                    var showVideoModal = ref(false);
-                    var modalVideoReel = ref(null);
-                    var modalVideoSrc = ref('resources/demo/vt-player/video_demo.mp4');
-                    var raycastVideo = ref(null);
-                    var lockVideo = ref(null);
                     var brewCopied = ref(false);
                     var icon3dContainer = ref(null);
                     var waveCanvas = ref(null);
@@ -1242,54 +1189,6 @@
                         if (isSidebarOpen.value) return;
                         if (lenis) lenis.scrollTo(0, { duration: 1.2 });
                     }
-
-                    function openVideoModal(src) {
-                        modalVideoSrc.value = src || 'resources/demo/vt-player/video_demo.mp4';
-                        showVideoModal.value = true;
-                    }
-
-                    function openLockVideo() {
-                        if (lockVideo.value) {
-                            lockVideo.value.pause();
-                        }
-                        modalVideoSrc.value = 'resources/demo/vt-player/video_demo.mp4';
-                        showVideoModal.value = true;
-                    }
-
-                    function openRaycastVideo() {
-                        if (raycastVideo.value) {
-                            raycastVideo.value.pause();
-                        }
-                        modalVideoSrc.value = 'resources/demo/vt-player/iOS_demo.mp4';
-                        showVideoModal.value = true;
-                    }
-
-                    function closeVideoModal() {
-                        showVideoModal.value = false;
-                    }
-
-                    watch(showVideoModal, function (val) {
-                        if (val) {
-                            nextTick(function () {
-                                nextTick(function () {
-                                    lucide.createIcons();
-                                    if (modalVideoReel.value) {
-                                        modalVideoReel.value.currentTime = 0;
-                                        modalVideoReel.value.play().catch(function () {});
-                                    }
-                                });
-                            });
-                        } else {
-                            if (modalVideoReel.value) {
-                                modalVideoReel.value.pause();
-                            }
-                            if (modalVideoSrc.value === 'resources/demo/vt-player/iOS_demo.mp4' && raycastVideo.value) {
-                                raycastVideo.value.play().catch(function () {});
-                            } else if (modalVideoSrc.value === 'resources/demo/vt-player/video_demo.mp4' && lockVideo.value) {
-                                lockVideo.value.play().catch(function () {});
-                            }
-                        }
-                    });
 
                     // ── Sidebar ──
 
@@ -1621,15 +1520,6 @@
                         isDark: isDark,
                         themeMode: themeMode,
                         toggleTheme: toggleTheme,
-                        showVideoModal: showVideoModal,
-                        openVideoModal: openVideoModal,
-                        openLockVideo: openLockVideo,
-                        openRaycastVideo: openRaycastVideo,
-                        closeVideoModal: closeVideoModal,
-                        modalVideoReel: modalVideoReel,
-                        modalVideoSrc: modalVideoSrc,
-                        raycastVideo: raycastVideo,
-                        lockVideo: lockVideo,
                         copyBrew: copyBrew,
                         brewCopied: brewCopied,
                         icon3dContainer: icon3dContainer,
