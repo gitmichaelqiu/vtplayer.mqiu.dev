@@ -805,6 +805,14 @@
                 var isDark = document.documentElement.classList.contains('dark');
                 var baseColor = isDark ? '210,235,255' : '255,255,255';
                 var pulse = (Math.sin(time * 0.0012) + 1) * 0.5;
+                var sweep = (time * 0.00008) % 1;
+
+                var focusGlow = ctx.createRadialGradient(width * 0.5, height * 0.48, 0, width * 0.5, height * 0.48, Math.min(width, height) * 0.42);
+                focusGlow.addColorStop(0, 'rgba(' + baseColor + ',0.07)');
+                focusGlow.addColorStop(0.55, 'rgba(' + baseColor + ',0.025)');
+                focusGlow.addColorStop(1, 'rgba(' + baseColor + ',0)');
+                ctx.fillStyle = focusGlow;
+                ctx.fillRect(0, 0, width, height);
 
                 for (var b = 0; b < bandPositions.length; b++) {
                     var y = bandPositions[b] * height;
@@ -819,17 +827,43 @@
                     ctx.moveTo(0, y);
                     ctx.lineTo(width, y);
                     ctx.stroke();
+
+                    var beamX = ((sweep + b * 0.19) % 1) * width;
+                    var beamGradient = ctx.createLinearGradient(beamX - 80, y, beamX + 80, y);
+                    beamGradient.addColorStop(0, 'rgba(' + baseColor + ',0)');
+                    beamGradient.addColorStop(0.5, 'rgba(' + baseColor + ',' + (0.16 + pulse * 0.08).toFixed(3) + ')');
+                    beamGradient.addColorStop(1, 'rgba(' + baseColor + ',0)');
+                    ctx.strokeStyle = beamGradient;
+                    ctx.lineWidth = isDark ? 2 : 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(beamX - 80, y);
+                    ctx.lineTo(beamX + 80, y);
+                    ctx.stroke();
                 }
+
+                var scanX = sweep * width;
+                var scanGradient = ctx.createLinearGradient(0, 0, 0, height);
+                scanGradient.addColorStop(0, 'rgba(' + baseColor + ',0)');
+                scanGradient.addColorStop(0.5, 'rgba(' + baseColor + ',0.06)');
+                scanGradient.addColorStop(1, 'rgba(' + baseColor + ',0)');
+                ctx.strokeStyle = scanGradient;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(scanX, height * 0.12);
+                ctx.lineTo(scanX, height * 0.88);
+                ctx.stroke();
 
                 for (var i = 0; i < markers.length; i++) {
                     var m = markers[i];
                     m.x += m.speed * (width / 2);
                     if (m.x > width + 30) m.x = -30;
                     var markerY = bandPositions[m.band] * height + Math.sin(time * 0.001 + m.phase) * 12;
-                    var markerAlpha = 0.12 + pulse * 0.08;
+                    var markerAlpha = 0.15 + pulse * 0.1;
                     ctx.strokeStyle = 'rgba(' + baseColor + ',' + markerAlpha.toFixed(3) + ')';
                     ctx.lineWidth = 1;
                     ctx.strokeRect(m.x, markerY - m.size * 0.5, m.size * 2.4, m.size);
+                    ctx.fillStyle = 'rgba(' + baseColor + ',' + (markerAlpha * 0.7).toFixed(3) + ')';
+                    ctx.fillRect(m.x + m.size * 0.45, markerY - 0.5, m.size * 0.45, 1);
                 }
                 requestAnimationFrame(draw);
             }
