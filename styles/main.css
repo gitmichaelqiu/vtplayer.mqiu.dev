@@ -871,7 +871,7 @@ html.dark .work-card:hover::before {
 .suite-label {
     display: inline-block;
     margin-left: 0.75rem;
-    padding: 0.18rem 0.6rem;
+    padding: 0.25rem 0.6rem;
     border: 1px solid currentColor;
     border-radius: 999px;
     font-family: 'Inter', sans-serif;

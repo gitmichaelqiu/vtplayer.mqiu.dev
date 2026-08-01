@@ -921,9 +921,11 @@
                         lang.value = l;
                         setStoredLang(l);
                         nextTick(function () {
-                            ScrollTrigger.getAll().forEach(function (st) { st.kill(); });
-                            initScrollAnimations();
                             lucide.createIcons();
+                            // Preserve reveal progress when Vue replaces localized text.
+                            // Recreating these triggers resets already-visible masks to their
+                            // initial offset and can leave them there after a language switch.
+                            ScrollTrigger.refresh();
                         });
                     }
 
