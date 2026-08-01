@@ -16,14 +16,14 @@ window.i18n = {
   zh: {
     site: { title: 'VTPlayer — 更清晰，更流畅' },
     hero: { heading: 'VTPlayer', tagline: '更清晰。更流畅。更出色。' },
-    quicknav: { page: '页面', links: '链接', more: 'macOSers', workflowSuite: 'Workflow', overview: '概览', demo: '演示', features: '功能', install: '安装', github: 'GitHub', releases: '发布', raycast: '诊断', portfolio: '主页', blog: '博客', optclicker: 'OptClicker', spaceswitcher: 'SpaceSwitcher' },
+    quicknav: { page: '页面', links: '链接', more: 'macOSers', workflowSuite: '工作流', overview: '概览', demo: '演示', features: '功能', install: '安装', github: 'GitHub', releases: '发布', raycast: '诊断', portfolio: '主页', blog: '博客', optclicker: 'OptClicker', spaceswitcher: 'SpaceSwitcher' },
     overview: { label: '概览', headingHtml: '为<span class="text-editorial gradient-text"> Apple 芯片</span>打造的视频增强。', body: 'VTPlayer 为 Mac 和 iPhone 带来更清晰的细节、更流畅的运动和更精致的画面。' },
     demo: { label: '演示', watch: '观看完整视频', close: '关闭视频' },
     features: { label: '功能', headingHtml: '让播放体验<span class="text-editorial gradient-text">更出色。</span>', slide1num: '01 / 画质调整', slide1title: '调整每一<span class="text-editorial gradient-text">帧</span>', slide1body: '在播放器中调整超分辨率、帧插值、运动模糊、降噪、锐化和 HDR 控制。', slide2num: '02 / 帧插值', slide2title: '让运动更加<span class="text-editorial gradient-text">自然</span>', slide2body: '通过生成中间帧，让运动更加流畅。', slide3num: '03 / 播放默认值', slide3title: '设定你的<span class="text-editorial gradient-text">起点</span>', slide3body: '选择打开新视频时 VTPlayer 使用的默认值。' },
     moreFeatures: { apiLabel: '你的媒体库', apiBody: '通过历史记录、逐视频偏好和快速继续播放，让视频始终触手可及。' },
     install: { label: '安装', headingHtml: '几秒钟即可<span class="text-editorial" style="color: var(--gold-light);">开始。</span>', body: '需要 macOS 26.0+ 及当前版本的 iOS/iPadOS。请从 GitHub Releases 下载最新版本。', download: '下载', or: '或', copy: '复制', disclaimer: 'VTPlayer 在 Mac App Store 之外分发。如果 macOS 阻止应用打开，请前往“系统设置 → 隐私与安全性”允许打开。' },
-    companions: { label: '更多应用', suiteLabel: 'Workflow', headingHtml: '探索完整的<span class="text-editorial gradient-text">工具箱。</span>', desktoprenamerBody: '使用自定义标签重命名 macOS 桌面空间。', spaceswitcherTitle: 'SpaceSwitcher', spaceswitcherBody: '控制每个 macOS 桌面显示哪些应用和程序坞项目。', optclickerTitle: 'OptClicker', optclickerBody: '使用 Option 键模拟右键点击。', learnMore: '了解更多' },
-    footer: { copyright: '© 2026 - Michael Qiu.', brand: 'VTPlayer。' },
+    companions: { label: '更多应用', suiteLabel: '工作流', headingHtml: '探索完整的<span class="text-editorial gradient-text">工具箱。</span>', desktoprenamerBody: '使用自定义标签重命名 macOS 桌面空间。', spaceswitcherTitle: 'SpaceSwitcher', spaceswitcherBody: '控制每个 macOS 桌面显示哪些应用和程序坞项目。', optclickerTitle: 'OptClicker', optclickerBody: '使用 Option 键模拟右键点击。', learnMore: '了解更多' },
+    footer: { copyright: '© 2026 - Michael Qiu.', brand: 'VTPlayer.' },
     sidebar: { home: '首页', overview: '概览', demo: '演示', features: '功能', install: '安装', companions: '更多应用', github: 'GitHub' },
     sectionLabels: { home: '首页', overview: '概览', demo: '演示', features: '功能', 'more-features': '功能', install: '安装', companions: '更多应用' }
   }
