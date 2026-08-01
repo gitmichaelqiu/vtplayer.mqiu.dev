@@ -202,6 +202,7 @@
             'resources/vtplayer-app-icon.png',
             'resources/works/vt-player-full.png',
             'resources/works/vt-player-full-dark.png',
+            'resources/works/desktop-renamer.png',
             'resources/works/opt-clicker.png',
             'resources/works/opt-clicker-full.png',
             'resources/works/opt-clicker-full-dark.png',
@@ -402,6 +403,7 @@
                             <div class="hero__quicknav-label">{{ t('quicknav.more') }}</div>
                             <a href="https://mqiu.dev" class="hero__quicknav-link">{{ t('quicknav.portfolio') }}</a>
                             <a href="https://mqiu.dev/blog" target="_blank" class="hero__quicknav-link">{{ t('quicknav.blog') }}</a>
+                            <a href="https://desktoprenamer.mqiu.dev" target="_blank" class="hero__quicknav-link">DesktopRenamer</a>
                             <a href="https://optclicker.mqiu.dev" target="_blank" class="hero__quicknav-link">OptClicker</a>
                             <a href="https://spaceswitcher.mqiu.dev" target="_blank" class="hero__quicknav-link">SpaceSwitcher</a>
                         </div>
@@ -635,7 +637,23 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-0" style="border-left: 1px solid var(--border-color);">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-0" style="border-left: 1px solid var(--border-color);">
+                        <!-- DesktopRenamer -->
+                        <div class="work-card" data-hover-follow
+                            style="border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+                            <h3 class="heading-l text-4xl">DesktopRenamer</h3>
+                            <p class="paragraph-m max-w-sm" style="color: var(--text-primary); font-family: 'Inter', sans-serif;">{{ t('companions.desktoprenamerBody') }}</p>
+                            <div class="work-meta">
+                                <a href="https://desktoprenamer.mqiu.dev" target="_blank" data-btn class="ml-auto" style="font-size: 1.2rem; letter-spacing: 0em;">
+                                    <div data-btn-bg></div>
+                                    <div data-btn-inner :data-text="t('companions.learnMore')">
+                                        <span data-btn-text>{{ t('companions.learnMore') }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <img src="resources/works/desktop-renamer.png" data-hover-follower class="card-subimg">
+                        </div>
+
                         <!-- SpaceSwitcher -->
                         <div class="work-card" data-hover-follow
                             style="border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
@@ -716,6 +734,7 @@
                             <a href="https://mqiu.dev" class="footer-nav-link">{{ t('quicknav.portfolio') }}</a>
                             <a href="https://mqiu.dev/blog" target="_blank" class="footer-nav-link">{{ t('quicknav.blog') }}</a>
                             <a href="https://optclicker.mqiu.dev" target="_blank" class="footer-nav-link">{{ t('quicknav.optclicker') }}</a>
+                            <a href="https://desktoprenamer.mqiu.dev" target="_blank" class="footer-nav-link">DesktopRenamer</a>
                             <a href="https://spaceswitcher.mqiu.dev" target="_blank" class="footer-nav-link">{{ t('quicknav.spaceswitcher') }}</a>
                         </div>
                     </div>
