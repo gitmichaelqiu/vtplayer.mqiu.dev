@@ -1279,7 +1279,7 @@ html[lang="zh"] .sidebar-link {
 }
 
 /* Shared centered domain loader */
-.preloader-content { position: fixed; inset: 0; bottom: auto; left: auto; align-items: center; justify-content: center; }
+.preloader-content { position: fixed; inset: 0; align-items: center; justify-content: center; }
 .preloader-mark-wrap { position: relative; width: min(72vw, 34rem); aspect-ratio: 4 / 1; display: flex; align-items: center; justify-content: center; }
 .preloader-fragment { position: absolute; left: 50%; top: 50%; width: 0.34rem; height: 0.34rem; border-radius: 999px; background: rgba(255,255,255,.9); opacity: 0; z-index: 2; animation: preloader-dot 1.6s cubic-bezier(.22,1,.36,1) infinite; }
 .preloader-fragment-a { --dot-x:-13rem; --dot-y:-2.8rem; animation-delay:.02s; } .preloader-fragment-b { --dot-x:13rem; --dot-y:-2.4rem; animation-delay:.12s; } .preloader-fragment-c { --dot-x:-14rem; --dot-y:2.4rem; animation-delay:.2s; } .preloader-fragment-d { --dot-x:14rem; --dot-y:2.2rem; animation-delay:.3s; } .preloader-fragment-e { --dot-x:-10rem; --dot-y:-4.2rem; animation-delay:.38s; } .preloader-fragment-f { --dot-x:10rem; --dot-y:4rem; animation-delay:.48s; }
