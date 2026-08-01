@@ -865,7 +865,12 @@ html.dark .work-card:hover::before {
 }
 
 .companions-grid .work-card:nth-child(even) {
-    padding-top: 4rem;
+    padding-top: 3rem;
+}
+
+.companions-grid .work-card {
+    gap: 1.5rem;
+    padding: 3rem;
 }
 
 .nav-suite {
