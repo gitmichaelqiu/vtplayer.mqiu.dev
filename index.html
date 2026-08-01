@@ -126,14 +126,11 @@
             aspect-ratio: 9 / 16;
             object-fit: contain !important;
         }
-        .feature-copy-card {
-            min-height: 20rem;
-            border-radius: 1rem;
-            background: linear-gradient(135deg, rgba(0,47,167,0.12), rgba(255,255,255,0.72));
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-        }
-        .feature-copy-card--diagnostics {
-            background: linear-gradient(135deg, rgba(0,0,0,0.08), rgba(0,47,167,0.18));
+        .feature-frame {
+            overflow: hidden;
+            border-radius: 1.5rem;
+            background: var(--surface, #f5f5f5);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
 
         /* 3D Icon — same width as main site .hero__logo */
@@ -471,7 +468,7 @@
                 </div>
 
                 <!-- Sticky slide stack: 6 features -->
-                <div class="feature-gallery" style="height: 420vh; position: relative; overflow: hidden;">
+                <div class="feature-gallery" style="height: 210vh; position: relative; overflow: hidden;">
                     <!-- Slide 1: Rename at Menu Bar — text left, media right -->
                     <div class="feature-slide" style="position: sticky; top: 0; height: 70vh; display: flex; align-items: center; overflow: hidden;">
                         <div class="container" style="width: 100%;">
@@ -482,7 +479,9 @@
                                     <p class="text-lg" style="font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.4; letter-spacing: -0.02em; color: var(--text-primary);">{{ t('features.slide1body') }}</p>
                                 </div>
                                 <div class="md:col-span-7">
-                                    <img src="resources/demo/vt-player/mac_settings_dark.png" alt="VTPlayer macOS settings" class="rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+                                    <div class="feature-frame">
+                                        <img src="resources/demo/vt-player/mac_settings_light.png" data-theme-light="resources/demo/vt-player/mac_settings_light.png" data-theme-dark="resources/demo/vt-player/mac_settings_dark.png" alt="VTPlayer macOS settings">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -515,65 +514,14 @@
                                     <p class="text-lg" style="font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.4; letter-spacing: -0.02em; color: var(--text-primary);">{{ t('features.slide3body') }}</p>
                                 </div>
                                 <div class="md:col-span-7">
-                                    <img src="resources/demo/vt-player/enhancements_light_dark.png" alt="VTPlayer enhancement controls" class="rounded-lg feature-video" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+                                    <div class="feature-frame">
+                                        <img src="resources/demo/vt-player/enhancements_light_dark.png" alt="VTPlayer enhancement controls">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Slide 4: Faster Switching — media left, text right -->
-                    <div class="feature-slide" style="position: sticky; top: 0; height: 70vh; display: flex; align-items: center; overflow: hidden;">
-                        <div class="container" style="width: 100%;">
-                            <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
-                                <div class="md:col-span-7">
-                                    <img src="resources/demo/vt-player/mac_settings_light.png" alt="VTPlayer macOS playback settings" class="rounded-lg feature-video" style="max-width: 640px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
-                                </div>
-                                <div class="md:col-span-5 md:pl-16">
-                                    <p class="text-sm font-semibold mb-3" style="font-family: 'Inter', sans-serif; letter-spacing: 0.01em; color: var(--klein-blue-text);">{{ t('features.slide4num') }}</p>
-                                    <h3 class="heading-l mb-4" v-html="t('features.slide4title')"></h3>
-                                    <p class="text-lg" style="font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.4; letter-spacing: -0.02em; color: var(--text-primary);">{{ t('features.slide4body') }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 5: Lock — text left, media right -->
-                    <div class="feature-slide" style="position: sticky; top: 0; height: 70vh; display: flex; align-items: center; overflow: hidden;">
-                        <div class="container" style="width: 100%;">
-                            <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
-                                <div class="md:col-span-5 md:pr-16">
-                                    <p class="text-sm font-semibold mb-3" style="font-family: 'Inter', sans-serif; letter-spacing: 0.01em; color: var(--klein-blue-text);">{{ t('features.slide5num') }}</p>
-                                    <h3 class="heading-l mb-4" v-html="t('features.slide5title')"></h3>
-                                    <p class="text-lg mb-6" style="font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.4; letter-spacing: -0.02em; color: var(--text-primary);">{{ t('features.slide5body') }}</p>
-                                </div>
-                                <div class="md:col-span-7">
-                                    <div class="feature-copy-card" aria-hidden="true"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 6: Raycast — media left, text right -->
-                    <div class="feature-slide" style="position: sticky; top: 0; height: 70vh; display: flex; align-items: center; overflow: hidden;">
-                        <div class="container" style="width: 100%;">
-                            <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
-                                <div class="md:col-span-7">
-                                    <div class="feature-copy-card feature-copy-card--diagnostics" aria-hidden="true"></div>
-                                </div>
-                                <div class="md:col-span-5 md:pl-16">
-                                    <p class="text-sm font-semibold mb-3" style="font-family: 'Inter', sans-serif; letter-spacing: 0.01em; color: var(--klein-blue-text);">{{ t('features.slide6num') }}</p>
-                                    <h3 class="heading-l mb-4" v-html="t('features.slide6title')"></h3>
-                                    <p class="text-lg mb-6" style="font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.4; letter-spacing: -0.02em; color: var(--text-primary);">{{ t('features.slide6body') }}</p>
-                                    <a href="https://github.com/gitmichaelqiu/VTPlayer" target="_blank" data-btn style="font-size: 1.2rem; letter-spacing: 0em;">
-                                        <div data-btn-bg></div>
-                                        <div data-btn-inner :data-text="t('features.slide6btn')">
-                                            <span data-btn-text>{{ t('features.slide6btn') }}</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -1025,6 +973,12 @@
                         document.documentElement.classList.toggle('dark', dark);
                     }
 
+                    function syncThemeImages(dark) {
+                        document.querySelectorAll('[data-theme-light][data-theme-dark]').forEach(function (image) {
+                            image.src = dark ? image.dataset.themeDark : image.dataset.themeLight;
+                        });
+                    }
+
                     function toggleTheme() {
                         switch (themeMode.value) {
                             case 'system':
@@ -1052,6 +1006,7 @@
                         document.documentElement.classList.add('theme-transitioning');
                         void document.documentElement.offsetHeight;
                         applyTheme(val);
+                        syncThemeImages(val);
                         setTimeout(function () {
                             document.documentElement.classList.remove('theme-transitioning');
                         }, 600);
@@ -1067,6 +1022,7 @@
                     }
 
                     applyTheme(resolveTheme() === 'dark');
+                    syncThemeImages(isDark.value);
 
                     function copyBrew() {
                         navigator.clipboard.writeText('brew install --cask gitmichaelqiu/tap/vtplayer').then(function () {
