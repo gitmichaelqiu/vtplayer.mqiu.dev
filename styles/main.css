@@ -397,7 +397,7 @@ html.dark .glass-strong {
     -webkit-tap-highlight-color: transparent;
     padding: 1.2rem 2.5rem;
     border: 1px solid var(--border-color);
-    cursor: pointer !important;
+    cursor: default !important;
     text-decoration: none;
     color: var(--text-primary);
     overflow: hidden;
@@ -594,7 +594,7 @@ footer svg path {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     transition: color 0.35s var(--mi-smooth);
-    cursor: pointer !important;
+    cursor: default !important;
 }
 
 .hero__quicknav-link::before,
@@ -608,6 +608,7 @@ footer svg path {
 
 .hero__quicknav-link:hover {
     color: var(--pure-white);
+    cursor: default !important;
 }
 
 .hero__quicknav-scroll {
@@ -989,9 +990,11 @@ html.dark .work-card:hover::before {
     color: rgba(255, 255, 255, 0.8);
     transition: color 0.35s cubic-bezier(0.32, 0.72, 0, 1);
     text-decoration: none;
+    cursor: default !important;
 }
 .footer-nav-link:hover {
     color: #ffffff;
+    cursor: default !important;
 }
 
 .footer-nav-label {
