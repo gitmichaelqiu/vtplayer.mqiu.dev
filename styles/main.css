@@ -720,6 +720,12 @@ footer svg path {
     opacity: 1;
 }
 
+html:not(.preloader-complete) .nav-dock {
+    transform: translateX(-50%) translateY(calc(100% + 2rem)) !important;
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
 .nav-dock__btn {
     display: flex;
     align-items: center;
