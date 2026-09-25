@@ -213,6 +213,7 @@
             'resources/works/space-switcher.png',
             'resources/works/space-switcher-full.png',
             'resources/works/space-switcher-full-dark.png',
+            'resources/works/wallpainter.png',
             'resources/demo/vt-player/video_demo.mp4',
             'resources/demo/vt-player/iOS_demo.mp4',
             'resources/demo/vt-player/mac_settings_dark.png',
@@ -405,11 +406,18 @@
                             <a href="https://mqiu.dev" class="hero__quicknav-link">{{ t('quicknav.portfolio') }}</a>
                             <a href="https://mqiu.dev/blog" target="_blank" class="hero__quicknav-link">{{ t('quicknav.blog') }}</a>
                         </div>
-                        <div class="hero__quicknav-col">
-                            <div class="hero__quicknav-label">{{ t('quicknav.more') }} <span class="nav-suite">/ {{ t('quicknav.workflowSuite') }}</span></div>
-                            <a href="https://desktoprenamer.mqiu.dev" target="_blank" class="hero__quicknav-link">DesktopRenamer</a>
-                            <a href="https://optclicker.mqiu.dev" target="_blank" class="hero__quicknav-link">OptClicker</a>
-                            <a href="https://spaceswitcher.mqiu.dev" target="_blank" class="hero__quicknav-link">SpaceSwitcher</a>
+                        <div class="hero__quicknav-series-cols">
+                            <div class="hero__quicknav-col">
+                                <div class="hero__quicknav-label">{{ t('quicknav.more') }} <span class="nav-suite">/ {{ t('quicknav.workflowSuite') }}</span></div>
+                                <a href="https://desktoprenamer.mqiu.dev" target="_blank" class="hero__quicknav-link">DesktopRenamer</a>
+                                <a href="https://optclicker.mqiu.dev" target="_blank" class="hero__quicknav-link">OptClicker</a>
+                                <a href="https://spaceswitcher.mqiu.dev" target="_blank" class="hero__quicknav-link">SpaceSwitcher</a>
+                            </div>
+                            <div class="hero__quicknav-col">
+                                <div class="hero__quicknav-label"><span class="nav-suite">/ {{ t('quicknav.mediaSuite') }}</span></div>
+                                <a href="https://vtplayer.mqiu.dev" target="_blank" rel="noopener" class="hero__quicknav-link">VTPlayer</a>
+                                <a href="https://wallpainter.mqiu.dev" target="_blank" rel="noopener" class="hero__quicknav-link">WallPainter</a>
+                            </div>
                         </div>
                     </div>
                     <div class="hero__quicknav-lang">
@@ -690,6 +698,41 @@
                             <img src="resources/works/space-switcher.png" data-hover-follower class="card-subimg">
                         </div>
                     </div>
+
+                    <div class="companion-series-label"><span class="nav-suite">/ {{ t('companions.mediaSuite') }}</span></div>
+                    <div class="companions-grid grid grid-cols-1 md:grid-cols-2 gap-0" style="border-left: 1px solid var(--border-color);">
+                        <!-- VTPlayer -->
+                        <div class="work-card" data-hover-follow
+                            style="border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+                            <h3 class="heading-l text-4xl">{{ t('companions.vtplayerTitle') }}</h3>
+                            <p class="paragraph-m max-w-sm" style="color: var(--text-primary); font-family: 'Inter', sans-serif;">{{ t('companions.vtplayerBody') }}</p>
+                            <div class="work-meta">
+                                <a href="https://vtplayer.mqiu.dev" target="_blank" rel="noopener" data-btn class="ml-auto" style="font-size: 1.2rem; letter-spacing: 0em;">
+                                    <div data-btn-bg></div>
+                                    <div data-btn-inner :data-text="t('companions.learnMore')">
+                                        <span data-btn-text>{{ t('companions.learnMore') }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <img src="resources/vtplayer-app-icon.png" data-hover-follower class="card-subimg">
+                        </div>
+
+                        <!-- WallPainter -->
+                        <div class="work-card" data-hover-follow
+                            style="border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+                            <h3 class="heading-l text-4xl">{{ t('companions.wallpainterTitle') }}</h3>
+                            <p class="paragraph-m max-w-sm" style="color: var(--text-primary); font-family: 'Inter', sans-serif;">{{ t('companions.wallpainterBody') }}</p>
+                            <div class="work-meta">
+                                <a href="https://wallpainter.mqiu.dev" target="_blank" rel="noopener" data-btn class="ml-auto" style="font-size: 1.2rem; letter-spacing: 0em;">
+                                    <div data-btn-bg></div>
+                                    <div data-btn-inner :data-text="t('companions.learnMore')">
+                                        <span data-btn-text>{{ t('companions.learnMore') }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <img src="resources/works/wallpainter.png" data-hover-follower class="card-subimg">
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -734,11 +777,18 @@
                         </div>
                     </div>
                     <div class="md:col-span-3">
-                        <p class="footer-nav-label" style="margin-bottom:0.35rem;">{{ t('quicknav.more') }} <span class="nav-suite">/ {{ t('quicknav.workflowSuite') }}</span></p>
-                        <div class="flex flex-col gap-1">
-                            <a href="https://desktoprenamer.mqiu.dev" target="_blank" class="footer-nav-link">DesktopRenamer</a>
-                            <a href="https://optclicker.mqiu.dev" target="_blank" class="footer-nav-link">{{ t('quicknav.optclicker') }}</a>
-                            <a href="https://spaceswitcher.mqiu.dev" target="_blank" class="footer-nav-link">{{ t('quicknav.spaceswitcher') }}</a>
+                        <div class="footer-series-cols">
+                            <div class="flex flex-col gap-1">
+                                <p class="footer-nav-label" style="margin-bottom:0.35rem;">{{ t('quicknav.more') }} <span class="nav-suite">/ {{ t('quicknav.workflowSuite') }}</span></p>
+                                <a href="https://desktoprenamer.mqiu.dev" target="_blank" class="footer-nav-link">DesktopRenamer</a>
+                                <a href="https://optclicker.mqiu.dev" target="_blank" class="footer-nav-link">{{ t('quicknav.optclicker') }}</a>
+                                <a href="https://spaceswitcher.mqiu.dev" target="_blank" class="footer-nav-link">{{ t('quicknav.spaceswitcher') }}</a>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <p class="footer-nav-label" style="margin-bottom:0.35rem;"><span class="nav-suite">/ {{ t('quicknav.mediaSuite') }}</span></p>
+                                <a href="https://vtplayer.mqiu.dev" target="_blank" rel="noopener" class="footer-nav-link">VTPlayer</a>
+                                <a href="https://wallpainter.mqiu.dev" target="_blank" rel="noopener" class="footer-nav-link">WallPainter</a>
+                            </div>
                         </div>
                     </div>
                 </div>

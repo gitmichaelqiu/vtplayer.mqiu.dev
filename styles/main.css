@@ -894,6 +894,26 @@ html.dark .work-card:hover::before {
     padding: 3rem;
 }
 
+.hero__quicknav-series-cols,
+.footer-series-cols {
+    display: flex;
+    gap: 2rem;
+}
+
+.hero__quicknav-series-cols .hero__quicknav-label,
+.footer-series-cols .footer-nav-label {
+    min-height: 1.35em;
+}
+
+.companion-series-label {
+    margin: 4rem 0 1.5rem;
+    color: var(--klein-blue-text);
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
 .nav-suite {
     margin-left: 0.2rem;
     color: currentColor;
